@@ -1,6 +1,6 @@
 class QuizzesController < ApplicationController
     def index
-        users = Quiz.all
-        render json: users
+        quizzes = Quiz.all
+        render json: quizzes
     end
 end
