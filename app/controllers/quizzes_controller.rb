@@ -1,7 +1,8 @@
 class QuizzesController < ApplicationController
+    # skip_before_action :authorized, only: :index
     def index
         quizzes = Quiz.all
-        render json: quizzes
+        render json: quizzes, include: :user
     end
 
     def show
