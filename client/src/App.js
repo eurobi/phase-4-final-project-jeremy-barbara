@@ -7,6 +7,7 @@ import Me from './components/Me';
 import { useEffect, useState } from 'react';
 import CreateQuiz from './components/CreateQuiz';
 import QuizInfo from './components/QuizInfo';
+import Attempt from './components/Attempt';
 
 function App() {
 
@@ -30,7 +31,8 @@ function App() {
         <Route path='/me' element={<Me currentUser={currentUser} setCurrentUser={setCurrentUser}/>}></Route>
         <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} />}></Route>
         <Route path='/create-quiz' element={<CreateQuiz currentUser={currentUser}/>}></Route>
-        <Route path='/quiz/:id' element={<QuizInfo currentUser={currentUser}/>}></Route>
+        <Route path='/quizzes/:id' element={<QuizInfo currentUser={currentUser}/>}></Route>
+        <Route path='/quizzes/:id/attempt' element={<Attempt currentUser={currentUser}/>}></Route>
         <Route path='/' element={<Home/>}></Route>
         
       </Routes>
