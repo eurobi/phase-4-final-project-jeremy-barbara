@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Quiz from "./Quiz";
 
-function Home(){
+function Home({currentUser}){
     const [quizzes, setQuizzes] = useState([])
 
     useEffect(() => {
@@ -12,12 +12,12 @@ function Home(){
 
     const quizElements = quizzes.map((quiz) => {
         return (
-            <Quiz quiz={quiz}/>
+            <Quiz key={quiz.id} currentUser={currentUser} quiz={quiz}/>
         )
     })
 
     return(
-        <div>
+        <div id='quiz-container'>
             {quizElements}
         </div>
     )

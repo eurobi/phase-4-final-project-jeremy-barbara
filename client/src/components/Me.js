@@ -10,7 +10,7 @@ function Me({ currentUser, setCurrentUser }){
             method : "DELETE"
         })
         .then(setCurrentUser(null))
-        .then(history('/'))
+        .then(history('/login'))
     }
 
 

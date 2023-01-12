@@ -2,7 +2,7 @@ import React from "react";
 import {useNavigate} from "react-router-dom"
 
 
-function Quiz({quiz}){
+function Quiz({quiz, currentUser}){
     const history = useNavigate()
 
 
@@ -12,15 +12,22 @@ function Quiz({quiz}){
 
     }
 
+    const quizImages = quiz.questions.map((question) => {
+        return <img key={question} className="quiz-preview-thumb" src={question}></img>
+    })
+
 
     return(
-        <>  
+        <div className="quiz-item">  
             <img src={quiz.user.profile_img}></img>
             <h1>{quiz.title}</h1>
-            <h1>{quiz.user.username}</h1>
-            <h3>{quiz.avg_score}</h3>
-            <button onClick={handleClick}>View Quiz</button>
-        </>
+            <div className="preview-thumb-container">
+                {quizImages}
+            </div>
+            <h4>Author: {quiz.user.username}</h4>
+            <h4>Average Score: {quiz.avg_score}/5</h4>
+            {currentUser? <button onClick={handleClick}>View Quiz</button> : null}
+        </div>
     )
 }
 

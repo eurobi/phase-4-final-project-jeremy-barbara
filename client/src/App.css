@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: rgb(106, 185, 214);
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .App-logo {
@@ -39,4 +41,65 @@
 
 img {
   width: 200px;
+}
+
+#quiz-container{
+  background-color: rgb(106, 185, 214);
+}
+
+.nav-bar{
+  background-color: rgb(91, 166, 193);
+  display: flex;
+  justify-content: left;
+}
+
+.nav-item{
+  margin-left: 10px;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.nav-item:hover{
+  background-color: rgb(106, 185, 214);
+}
+
+a:visited{
+  text-decoration: none;
+  color: white;
+}
+
+.quiz-item{
+  background-color: rgb(255, 255, 255);
+  margin: 20px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.quiz-preview-thumb{
+  width: 70px;
+  height: 70px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.preview-thumb-container{
+  display: flex;
+  justify-content: center;
+
+
+}
+
+button{
+  border: none;
+  background-color: #61dafb;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #61dafb;
+
+}
+
+button:hover{
+  background-color: white;
+  border: 1px solid #61dafb;
 }

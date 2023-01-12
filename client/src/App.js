@@ -33,7 +33,7 @@ function App() {
         <Route path='/create-quiz' element={<CreateQuiz currentUser={currentUser}/>}></Route>
         <Route path='/quizzes/:id' element={<QuizInfo currentUser={currentUser}/>}></Route>
         <Route path='/quizzes/:id/attempt' element={<Attempt currentUser={currentUser}/>}></Route>
-        <Route path='/' element={<Home/>}></Route>
+        <Route path='/' element={<Home currentUser={currentUser}/>}></Route>
         
       </Routes>
     </div>

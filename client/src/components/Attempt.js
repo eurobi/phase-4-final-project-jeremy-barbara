@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useParams } from "react-router";
+import AttemptResults from "./AttemptResults";
 
 
 
 function Attempt({quiz, currentUser}){
-
-
+    const [attemptData, setAttemptData] = useState()
+    const [quizComplete, setQuizComplete] = useState(false)
     const [answers, setAnswers] = useState({
         q1: "",
         q2: "",
@@ -37,8 +38,17 @@ function Attempt({quiz, currentUser}){
             body: JSON.stringify(data)
         })
         .then((resp) => resp.json())
-        .then((attempt) => console.log(attempt))
+        .then((attempt) => {
+            setAttemptData(attempt)
+            setQuizComplete(true)
+        })
     }
+
+    if(quizComplete){
+        <AttemptResults attempt={attemptData}></AttemptResults>
+    }
+    else{
+
 
     return(
         <>
@@ -55,7 +65,7 @@ function Attempt({quiz, currentUser}){
             </div>
             
         </>
-    )
+    )}
 }
 
 export default Attempt
