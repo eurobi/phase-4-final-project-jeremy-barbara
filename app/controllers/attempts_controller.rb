@@ -1,7 +1,7 @@
 class AttemptsController < ApplicationController
     def index
         attempts = Attempt.all
-        render json: attempts
+        render json: attempts, include: :quiz
     end
 
     def create

@@ -30,7 +30,7 @@ function LoginForm({currentUser, setCurrentUser}){
                     <input id='username-input' className="login-input" value={formData.username} onChange={(e) => setFormData({...formData, username: e.target.value})}></input>
                 <label for='password-input'>Password: </label>
                     <input id='password-input' className="login-input" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})}></input>
-                <input type='submit'></input>
+                <input className="submit-button" type='submit'></input>
             </form>
     )
 }

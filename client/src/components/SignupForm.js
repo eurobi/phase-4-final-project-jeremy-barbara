@@ -1,4 +1,6 @@
 import React, { useState } from "react"
+import {useNavigate} from "react-router-dom"
+
 
 function SignupForm({currentUser, setCurrentUser}){
     const [formData, setFormData] = useState({
@@ -7,6 +9,9 @@ function SignupForm({currentUser, setCurrentUser}){
         password_confirmation: "",
         pofile_img_url: ""
     })
+
+    const history = useNavigate()
+
 
     function handleSubmit(e){
         e.preventDefault()
@@ -18,7 +23,9 @@ function SignupForm({currentUser, setCurrentUser}){
             body: JSON.stringify(formData)
         }).then(response => {
             if(response.ok){
-                response.json().then(user => setCurrentUser(user))
+                response.json()
+                .then(user => setCurrentUser(user))
+                .then(history('/me'))
             }
             else{
                 response.json().then(e => console.log(e.errors))
@@ -34,9 +41,9 @@ function SignupForm({currentUser, setCurrentUser}){
                     <input id='password-input' className="login-input" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})}></input>
                 <label for='password-confirmation-input'>Confirm Password: </label>
                     <input id='password-confirmation-input' className="login-input" value={formData.password_confirmation} onChange={(e) => setFormData({...formData, password_confirmation: e.target.value})}></input>
-                <label for='profile-image-input'>Profile Image: </label>
+                <label for='profile-image-input'>Profile Image URL: </label>
                     <input id='profile-image-input' className="login-input" value={formData.pofile_img_url} onChange={(e) => setFormData({...formData, pofile_img_url: e.target.value})}></input>
-                <input type='submit'></input>
+                <input className="submit-button" type='submit'></input>
             </form>
     )
 }

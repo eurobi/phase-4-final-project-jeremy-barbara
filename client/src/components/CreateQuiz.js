@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import {useNavigate} from "react-router-dom"
+
 
 function CreateQuiz({currentUser}){
 
@@ -15,6 +17,8 @@ function CreateQuiz({currentUser}){
         a4: "",
         a5: "",
     })
+
+    const history = useNavigate()
 
     function handleSubmit(e){
         e.preventDefault()
@@ -35,47 +39,66 @@ function CreateQuiz({currentUser}){
             },
             body: JSON.stringify(quizData)
         }).then(r => r.json())
-        .then(quiz => console.log(quiz))
+        .then(quiz => history(`/quizzes/${quiz.id}`))
     }
 
     if(!currentUser){
         return(
-            <h1>please log in or sign up to create a quiz.</h1>
+            <h4>please log in or sign up to create a quiz.</h4>
         )
     }
 
     return(
-        <form id="quiz-form" onSubmit={handleSubmit}>
-            <label for='quiz-title-input'>Quiz Title: </label>
-            <input id='quiz-title-input' value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})}></input>
+        <div id='quiz-form-container'>
+            <form id="quiz-form" onSubmit={handleSubmit}>
+                <label for='quiz-title-input'><strong>Quiz Title:</strong> </label>
+                <input id='quiz-title-input' value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})}></input>
 
-            <label for='question-1-input'>Image 1: </label>
-            <input id='question-1-input' value={formData.q1} onChange={(e) => setFormData({...formData, q1: e.target.value})}></input>
-            <label for='answer-1-input'>Answer: </label>
-            <input id='answer-1-input' value={formData.a1} onChange={(e) => setFormData({...formData, a1: e.target.value})}></input>
+                <label for='question-1-input'>Image 1 URL: </label>
+                <input id='question-1-input' value={formData.q1} onChange={(e) => setFormData({...formData, q1: e.target.value})}></input>
+                <label for='answer-1-input'>Answer: </label>
+                <input className="answer-input" id='answer-1-input' value={formData.a1} onChange={(e) => setFormData({...formData, a1: e.target.value})}></input>
 
-            <label for='question-2-input'>Image 2: </label>
-            <input id='question-2-input' value={formData.q2} onChange={(e) => setFormData({...formData, q2: e.target.value})}></input>
-            <label for='answer-2-input'>Answer: </label>
-            <input id='answer-2-input' value={formData.a2} onChange={(e) => setFormData({...formData, a2: e.target.value})}></input>
+                <label for='question-2-input'>Image 2 URL: </label>
+                <input id='question-2-input' value={formData.q2} onChange={(e) => setFormData({...formData, q2: e.target.value})}></input>
+                <label for='answer-2-input'>Answer: </label>
+                <input className="answer-input" id='answer-2-input' value={formData.a2} onChange={(e) => setFormData({...formData, a2: e.target.value})}></input>
 
-            <label for='question-3-input'>Image 3: </label>
-            <input id='question-3-input' value={formData.q3} onChange={(e) => setFormData({...formData, q3: e.target.value})}></input>
-            <label for='answer-3-input'>Answer: </label>
-            <input id='answer-3-input' value={formData.a3} onChange={(e) => setFormData({...formData, a3: e.target.value})}></input>
+                <label for='question-3-input'>Image 3 URL: </label>
+                <input id='question-3-input' value={formData.q3} onChange={(e) => setFormData({...formData, q3: e.target.value})}></input>
+                <label for='answer-3-input'>Answer: </label>
+                <input className="answer-input" id='answer-3-input' value={formData.a3} onChange={(e) => setFormData({...formData, a3: e.target.value})}></input>
 
-            <label for='question-4-input'>Image 4: </label>
-            <input id='question-4-input' value={formData.q4} onChange={(e) => setFormData({...formData, q4: e.target.value})}></input>
-            <label for='answer-4-input'>Answer: </label>
-            <input id='answer-4-input' value={formData.a4} onChange={(e) => setFormData({...formData, a4: e.target.value})}></input>
+                <label for='question-4-input'>Image 4 URL: </label>
+                <input id='question-4-input' value={formData.q4} onChange={(e) => setFormData({...formData, q4: e.target.value})}></input>
+                <label for='answer-4-input'>Answer: </label>
+                <input className="answer-input" id='answer-4-input' value={formData.a4} onChange={(e) => setFormData({...formData, a4: e.target.value})}></input>
 
-            <label for='question-5-input'>Image 5: </label>
-            <input id='question-5-input' value={formData.q5} onChange={(e) => setFormData({...formData, q5: e.target.value})}></input>
-            <label for='answer-5-input'>Answer: </label>
-            <input id='answer-5-input' value={formData.a5} onChange={(e) => setFormData({...formData, a5: e.target.value})}></input>
+                <label for='question-5-input'>Image 5 URL: </label>
+                <input id='question-5-input' value={formData.q5} onChange={(e) => setFormData({...formData, q5: e.target.value})}></input>
+                <label for='answer-5-input'>Answer: </label>
+                <input className="answer-input" id='answer-5-input' value={formData.a5} onChange={(e) => setFormData({...formData, a5: e.target.value})}></input>
 
-            <input type='submit'></input>
-        </form>
+                <input className="submit-button" type='submit'></input>
+            </form>
+            <div className="quiz-form-image-container">
+                <div className="img-container">
+                    <img className="quiz-form-img" src={formData.q1}></img>
+                </div>
+                <div className="img-container">
+                    <img className="quiz-form-img" src={formData.q2}></img>
+                </div>
+                <div className="img-container">
+                    <img className="quiz-form-img" src={formData.q3}></img>
+                </div>
+                <div className="img-container">
+                    <img className="quiz-form-img" src={formData.q4}></img>
+                </div>
+                <div className="img-container">
+                    <img className="quiz-form-img" src={formData.q5}></img>
+                </div>
+            </div>
+        </div>
     )
 }
 

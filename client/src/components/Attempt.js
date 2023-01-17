@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useParams } from "react-router";
 import AttemptResults from "./AttemptResults";
+import {useNavigate} from "react-router-dom"
 
 
 
 function Attempt({quiz, currentUser}){
+    const history = useNavigate()
+    const [done, setDone] = useState(false)
     const [attemptData, setAttemptData] = useState()
-    const [quizComplete, setQuizComplete] = useState(false)
     const [answers, setAnswers] = useState({
         q1: "",
         q2: "",
@@ -37,19 +39,26 @@ function Attempt({quiz, currentUser}){
             },
             body: JSON.stringify(data)
         })
-        .then((resp) => resp.json())
-        .then((attempt) => {
-            setAttemptData(attempt)
-            setQuizComplete(true)
+        .then((response) => {
+            if(response.ok){
+                response.json()
+                .then(attempt => {
+                    setAttemptData(attempt)
+                    setDone(true)
+                })
+            }
+            else{
+                response.json().then(e => console.log(e.errors))
+            }
         })
+        
     }
 
-    if(quizComplete){
-        <AttemptResults attempt={attemptData}></AttemptResults>
-    }
-    else{
-
-
+    if(done){
+        return(
+            <AttemptResults currentUser={currentUser} attemptData={attemptData}></AttemptResults>
+        )
+    }else{
     return(
         <>
             <div>
@@ -65,7 +74,7 @@ function Attempt({quiz, currentUser}){
             </div>
             
         </>
-    )}
-}
+    )}}
+
 
 export default Attempt

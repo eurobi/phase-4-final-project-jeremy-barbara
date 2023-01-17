@@ -8,9 +8,9 @@ function Login({ currentUser, setCurrentUser }){
 
     return (
         <>
-        <button onClick={() => setLoggingIn(true)} className="login-toggle">Login</button>
-        <button onClick={() => setLoggingIn(false)} className="login-toggle">Signup</button>
-        {loggingIn? <LoginForm currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <SignupForm currentUser={currentUser} setCurrentUser={setCurrentUser}  />}
+            <button className={loggingIn? "selected" : null} onClick={() => setLoggingIn(true)}>Login</button>
+            <button className={loggingIn? null : "selected"} onClick={() => setLoggingIn(false)}>Signup</button>
+            {loggingIn? <LoginForm currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <SignupForm currentUser={currentUser} setCurrentUser={setCurrentUser}  />}
         </>
     )
 }

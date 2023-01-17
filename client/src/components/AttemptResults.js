@@ -1,8 +1,14 @@
 import React from "react";
 
-function AttemptResults({ attempt }){
+function AttemptResults({ currentUser, attemptData }){
+
+    console.log(attemptData)
     return(
-        <h1>{attempt.score}</h1>
+        <>
+            <h1>{attemptData.quiz.title}</h1>
+            <h1>Score: {attemptData.score}/5</h1>
+            <h1>{currentUser.username}</h1>
+        </>
     )
 }
 
