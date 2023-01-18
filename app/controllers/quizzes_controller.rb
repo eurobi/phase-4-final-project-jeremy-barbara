@@ -19,6 +19,11 @@ class QuizzesController < ApplicationController
         end
     end
 
+    def destroy
+        quiz = Quiz.find_by(id: params[:id])
+        quiz.destroy
+    end
+
     private
 
     def quiz_params

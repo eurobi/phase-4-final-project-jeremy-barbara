@@ -192,3 +192,41 @@ input{
   background-color: #e1714f;
   border-color: #282c34;
 }
+
+ul{
+  list-style-type: none;
+}
+
+#results-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  justify-self: center;
+}
+
+#wrong-answer{
+  color: red;
+}
+
+#right-answer{
+  color: green;
+}
+
+.result{
+  margin-top: 30px;
+  padding-bottom: 60px;
+}
+
+.result-img{
+  height: 100px;
+}
+
+.results-column{
+  width: 30%;
+}
+
+.attempt-results{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

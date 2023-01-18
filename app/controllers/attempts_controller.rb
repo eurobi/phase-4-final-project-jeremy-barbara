@@ -9,10 +9,16 @@ class AttemptsController < ApplicationController
         if attempt
             quiz = Quiz.find_by(id: attempt[:quiz_id])
             attempt.update(score: score_quiz(attempt.answers, quiz.answers))
-            render json: attempt, status: :created
+            render json: attempt, include: :quiz, status: :created
         else
             render json: {errors: attempt.errors.full_messages}, status: :unprocessable_entity
         end
+    end
+
+    def show
+        user = User.find_by(id: params[:id])
+        attempts = user.attempts
+        render json: attempts, include: :quiz
     end
 
     private

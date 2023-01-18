@@ -20,7 +20,9 @@ function QuizInfo({currentUser}){
     }
 
     function handleDeleteClick(){
-        
+        fetch(`/quizzes/${id}`,{
+            method: "DELETE"
+        }).then(history('/'))
     }
     
 
