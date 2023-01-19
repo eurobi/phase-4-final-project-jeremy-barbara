@@ -230,3 +230,16 @@ ul{
   justify-content: center;
   flex-direction: column;
 }
+
+.profile-img{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+#welcome-banner{
+  display: flex;
+  justify-content: center;
+}

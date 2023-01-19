@@ -19,8 +19,18 @@ class UsersController < ApplicationController
         end
     end
 
+    def update
+        user = User.find_by(id: session[:user_id])
+        if user
+            user.update(username: params[:username], pofile_img_url: params[:pofile_img_url])
+            if user.valid?
+                render json: user, status: :created
+            end
+        end
+    end
+
     private
     def user_params
-        params.permit(:username, :profile_img_url, :password, :password_confirmation)
+        params.permit(:username, :pofile_img_url, :password, :password_confirmation)
     end
 end
