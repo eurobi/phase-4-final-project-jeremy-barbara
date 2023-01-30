@@ -5,7 +5,6 @@ import Quiz from "./Quiz";
 import EditUserForm from "./EditUserForm";
 
 function Me({ currentUser, setCurrentUser }){
-
     const history = useNavigate()
     const [editing, setEditing] = useState(false)
 
@@ -25,16 +24,21 @@ function Me({ currentUser, setCurrentUser }){
     const [quizzes, setQuizzes] = useState([])
 
     useEffect(() => {
-        fetch('/quizzes')
+        fetch(`/users/${currentUser.id}/quizzes`)
         .then(r => r.json())
         .then(quizzes => setQuizzes(quizzes))
     },[])
+    
+    let quizElements
 
-    const quizElements = quizzes.map((quiz) => {
-        return (
-            <Quiz key={quiz.id} currentUser={currentUser} quiz={quiz}/>
-        )
-    })
+    if (quizzes !== []){
+        quizElements = quizzes.map((quiz) => {
+            return (
+                <Quiz key={quiz.id} currentUser={currentUser} quiz={quiz}/>
+            )
+        })
+    }
+    
 
 
     return (
@@ -47,7 +51,7 @@ function Me({ currentUser, setCurrentUser }){
             <button onClick={handleEditClick}>Edit User Details</button>
             {editing? <EditUserForm setEditing={setEditing} currentUser={currentUser} setCurrentUser={setCurrentUser}></EditUserForm>: null}
             <h1>Your quizzes</h1>
-            {quizElements}
+            {quizElements? quizElements : null}
 
         </div>
     )

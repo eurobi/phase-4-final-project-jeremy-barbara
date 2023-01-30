@@ -25,7 +25,7 @@ function SignupForm({currentUser, setCurrentUser}){
             if(response.ok){
                 response.json()
                 .then(user => setCurrentUser(user))
-                .then(history('/me'))
+                .then(history('/'))
             }
             else{
                 response.json().then(e => console.log(e.errors))

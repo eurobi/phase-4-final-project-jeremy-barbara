@@ -19,7 +19,7 @@ function Quiz({quiz, currentUser}){
 
     return(
         <div className="quiz-item">  
-            <img src={quiz.user.profile_img}></img>
+            
             <h1>{quiz.title}</h1>
             <div className="preview-thumb-container">
                 {quizImages}

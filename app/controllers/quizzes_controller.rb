@@ -24,6 +24,11 @@ class QuizzesController < ApplicationController
         quiz.destroy
     end
 
+    def userquizzes
+        quizzes = Quiz.where(:user_id => params[:id])
+        render json: quizzes, include: :user
+    end
+
     private
 
     def quiz_params

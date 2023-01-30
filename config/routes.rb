@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/me', to: "users#show"
   get '/auth', to: "users#show"
   get '/users/:id/attempts', to: "attempts#show"
+  get '/users/:id/quizzes', to: "quizzes#userquizzes"
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

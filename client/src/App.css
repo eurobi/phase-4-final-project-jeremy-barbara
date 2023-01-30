@@ -243,3 +243,17 @@ ul{
   display: flex;
   justify-content: center;
 }
+
+#attempt-div{
+  display: flex;
+  justify-content: center;
+}
+
+.attempt-sub-div{
+  width: 40%;
+  margin-top: 20px;
+}
+
+#attempt-form{
+    
+}
