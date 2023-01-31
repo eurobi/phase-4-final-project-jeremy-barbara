@@ -3,10 +3,15 @@ import {useNavigate} from "react-router-dom"
 import { useState, useEffect } from "react";
 import Quiz from "./Quiz";
 import EditUserForm from "./EditUserForm";
+import UserScores from "./UserScores";
 
 function Me({ currentUser, setCurrentUser }){
     const history = useNavigate()
     const [editing, setEditing] = useState(false)
+
+    function handleCreateQuiz(e){
+        history('/create-quiz')
+    }
 
     function handleLogout(e){
         fetch('/logout',{
@@ -50,8 +55,19 @@ function Me({ currentUser, setCurrentUser }){
             <button onClick={handleLogout}>Logout</button>
             <button onClick={handleEditClick}>Edit User Details</button>
             {editing? <EditUserForm setEditing={setEditing} currentUser={currentUser} setCurrentUser={setCurrentUser}></EditUserForm>: null}
-            <h1>Your quizzes</h1>
-            {quizElements? quizElements : null}
+            <div id='user-quiz-info-container'>
+                <div>
+                    <div id='your-quizzes-banner'>
+                        <h1>Your quizzes</h1>
+                        <button id='your-quizzes-banner-btn' onClick={handleCreateQuiz}>Create Quiz</button>
+                    </div>
+                    {quizElements? quizElements : null}
+                </div>
+                <div>
+                    <h1>Your scores</h1>
+                    <UserScores currentUser={currentUser}/>
+                </div>
+            </div>
 
         </div>
     )
