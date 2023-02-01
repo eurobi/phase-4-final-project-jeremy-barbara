@@ -43,6 +43,13 @@ function QuizInfo({currentUser}){
 
     )})
     
+    let attempters = []
+
+    if(quiz.attempts){
+        attempters = quiz.attempts.map((attempt) => attempt.user_id)
+    }
+    
+    
 
     const { id } = useParams()
 
@@ -56,7 +63,8 @@ function QuizInfo({currentUser}){
         <>
             <h1>{quiz.title}</h1>
             {quiz? imgs : null}
-            {quiz.user_id !== currentUser.id? <button onClick={handleClick} id='take-quiz-btn'>Take quiz</button> : <button onClick={handleDeleteClick} id='delete-quiz-btn'>Delete quiz</button>}
+            {quiz.user_id !== currentUser.id && !attempters.includes(currentUser.id) ? <button onClick={handleClick} id='take-quiz-btn'>Take quiz</button> : null}
+            {attempters.includes(currentUser.id)? <h4>You've already taken this quiz</h4> : null}
         </>
     )}
 }

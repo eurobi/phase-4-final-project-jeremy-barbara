@@ -7,7 +7,7 @@ class QuizzesController < ApplicationController
 
     def show
         quiz = Quiz.find_by(id: params[:id])
-        render json: quiz
+        render json: quiz, include: :attempts
     end
 
     def create
