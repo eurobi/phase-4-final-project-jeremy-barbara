@@ -12,6 +12,8 @@ function SignupForm({currentUser, setCurrentUser}){
 
     const history = useNavigate()
 
+    const [errors, setErrors] = useState()
+
 
     function handleSubmit(e){
         e.preventDefault()
@@ -28,7 +30,7 @@ function SignupForm({currentUser, setCurrentUser}){
                 .then(history('/'))
             }
             else{
-                response.json().then(e => console.log(e.errors))
+                response.json().then(e => setErrors(Object.entries(e.errors).flat()))
             }
         })
     }
@@ -44,6 +46,7 @@ function SignupForm({currentUser, setCurrentUser}){
                 <label for='profile-image-input'>Profile Image URL: </label>
                     <input id='profile-image-input' className="login-input" value={formData.pofile_img_url} onChange={(e) => setFormData({...formData, pofile_img_url: e.target.value})}></input>
                 <input className="submit-button" type='submit'></input>
+                <h4>{errors}</h4>
             </form>
     )
 }

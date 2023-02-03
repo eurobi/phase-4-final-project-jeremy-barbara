@@ -67,11 +67,11 @@ function Attempt({quiz, currentUser}){
                 </div>
                 <div className='attempt-sub-div'>
                     <form onSubmit={handleSubmit} id='attempt-form'>
-                        <input onChange={(e) => setAnswers({...answers, q1: e.target.value})} value={answers.q1} id='attempt-input-q1'></input>
-                        <input onChange={(e) => setAnswers({...answers, q2: e.target.value})} value={answers.q2} id='attempt-input-q2'></input>
-                        <input onChange={(e) => setAnswers({...answers, q3: e.target.value})} value={answers.q3} id='attempt-input-q3'></input>
-                        <input onChange={(e) => setAnswers({...answers, q4: e.target.value})} value={answers.q4} id='attempt-input-q4'></input>
-                        <input onChange={(e) => setAnswers({...answers, q5: e.target.value})} value={answers.q5} id='attempt-input-q5'></input>
+                        <input className="attempt-answer-input" onChange={(e) => setAnswers({...answers, q1: e.target.value})} value={answers.q1} id='attempt-input-q1'></input>
+                        <input className="attempt-answer-input" onChange={(e) => setAnswers({...answers, q2: e.target.value})} value={answers.q2} id='attempt-input-q2'></input>
+                        <input className="attempt-answer-input" onChange={(e) => setAnswers({...answers, q3: e.target.value})} value={answers.q3} id='attempt-input-q3'></input>
+                        <input className="attempt-answer-input" onChange={(e) => setAnswers({...answers, q4: e.target.value})} value={answers.q4} id='attempt-input-q4'></input>
+                        <input className="attempt-answer-input" onChange={(e) => setAnswers({...answers, q5: e.target.value})} value={answers.q5} id='attempt-input-q5'></input>
                         <input type='submit'></input>
                     </form>
                 </div>

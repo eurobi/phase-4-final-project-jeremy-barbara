@@ -9,6 +9,8 @@ function LoginForm({currentUser, setCurrentUser}){
 
     const history = useNavigate()
 
+    const [errors, setErrors] = useState()
+
 
     function handleSubmit(e){
         e.preventDefault()
@@ -19,9 +21,15 @@ function LoginForm({currentUser, setCurrentUser}){
             },
             body: JSON.stringify(formData)
         })
-        .then(response => response.json())
-        .then(user => setCurrentUser(user))
-        .then(history('/'))
+        .then(response => {
+            if(response.ok){
+                response.json()
+                .then(user => setCurrentUser(user))
+                .then(history('/'))
+            }else{
+                response.json().then(e => setErrors((e.error)))
+            }
+        })
     }
 
     return(
@@ -29,8 +37,9 @@ function LoginForm({currentUser, setCurrentUser}){
                 <label for='username-input'>Username: </label>
                     <input id='username-input' className="login-input" value={formData.username} onChange={(e) => setFormData({...formData, username: e.target.value})}></input>
                 <label for='password-input'>Password: </label>
-                    <input id='password-input' className="login-input" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})}></input>
+                    <input type='password' id='password-input' className="login-input" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})}></input>
                 <input className="submit-button" type='submit'></input>
+                <h4>{errors}</h4>
             </form>
     )
 }

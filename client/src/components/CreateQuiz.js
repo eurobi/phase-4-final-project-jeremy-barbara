@@ -4,6 +4,8 @@ import {useNavigate} from "react-router-dom"
 
 function CreateQuiz({currentUser}){
 
+    const [errors, setErrors] = useState()
+
     const [formData, setFormData] = useState({
         title: "",
         q1: "",
@@ -38,8 +40,14 @@ function CreateQuiz({currentUser}){
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(quizData)
-        }).then(r => r.json())
-        .then(quiz => history(`/quizzes/${quiz.id}`))
+        }).then(r => {
+            if(r.ok){
+                r.json()
+                .then(quiz => history(`/quizzes/${quiz.id}`))
+            }else{
+                r.json().then(e => setErrors(Object.entries(e.errors).flat()))
+            }
+        })
     }
 
     if(!currentUser){
@@ -50,6 +58,7 @@ function CreateQuiz({currentUser}){
 
     return(
         <div id='quiz-form-container'>
+            <h4>{errors}</h4>
             <form id="quiz-form" onSubmit={handleSubmit}>
                 <label for='quiz-title-input'><strong>Quiz Title:</strong> </label>
                 <input id='quiz-title-input' value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})}></input>
