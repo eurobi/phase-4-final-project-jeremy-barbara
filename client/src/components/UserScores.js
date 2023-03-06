@@ -13,7 +13,7 @@ function UserScores({currentUser}){
         fetch(`/users/${currentUser.id}/attempts`)
         .then(r => r.json())
         .then(attemptData => setAttemptData(attemptData))
-    },[])
+    },[currentUser])
 
     let attemptElements
 

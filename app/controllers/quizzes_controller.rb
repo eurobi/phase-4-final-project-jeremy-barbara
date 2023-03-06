@@ -1,13 +1,14 @@
 class QuizzesController < ApplicationController
     # skip_before_action :authorized, only: :index
+    before_action :find_quiz, only: [:show, :destroy]
+
     def index
         quizzes = Quiz.all
         render json: quizzes, include: :user
     end
 
     def show
-        quiz = Quiz.find_by(id: params[:id])
-        render json: quiz, include: :attempts
+        render json: @quiz, include: :attempts
     end
 
     def create
@@ -20,8 +21,7 @@ class QuizzesController < ApplicationController
     end
 
     def destroy
-        quiz = Quiz.find_by(id: params[:id])
-        quiz.destroy
+        @quiz.destroy
     end
 
     def userquizzes
@@ -34,4 +34,9 @@ class QuizzesController < ApplicationController
     def quiz_params
         params.permit(:user_id, :title, :questions => [], :answers => [])
     end
+
+    def find_quiz
+        @quiz = Quiz.find_by(id: params[:id])
+    end
+
 end

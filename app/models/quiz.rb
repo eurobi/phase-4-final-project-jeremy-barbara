@@ -2,6 +2,15 @@ class Quiz < ApplicationRecord
     belongs_to :user
     has_many :attempts
     has_many :users, through: :attempts
+    validates :title, presence: true
+    validates :questions, length: {
+        minimum: 5,
+        message: 'There must be 5 questions'
+    }
+    validates :answers, length: {
+        minimum: 5,
+        message: 'There must be 5 answers.'
+    }
 
 
     def avg_score
