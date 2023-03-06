@@ -8,9 +8,9 @@ A picture quiz app where users can create and attempt trivia quizzes of various 
 ## Installation and Usage
 
 
-bundle install
-npm install
-rails db:migrate
+- bundle install
+- npm install
+- rails db:migrate
 
 You can use the following commands to run the application:
 
