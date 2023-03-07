@@ -14,6 +14,14 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState('')
 
+  const [quizzes, setQuizzes] = useState([])
+
+    useEffect(() => {
+        fetch('/quizzes')
+        .then(r => r.json())
+        .then(quizzes => setQuizzes(quizzes))
+    },[currentUser])
+
   useEffect(()=>{
     fetch('/auth')
     .then(resp => {
@@ -29,12 +37,12 @@ function App() {
     <div className="App">
       <NavBar currentUser={currentUser}/>
       <Routes>
-        <Route path='/me' element={<Me currentUser={currentUser} setCurrentUser={setCurrentUser}/>}></Route>
+        <Route path='/me' element={<Me quizzes={quizzes} setQuizzes={setQuizzes} currentUser={currentUser} setCurrentUser={setCurrentUser}/>}></Route>
         <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} />}></Route>
-        <Route path='/create-quiz' element={<CreateQuiz currentUser={currentUser}/>}></Route>
-        <Route path='/quizzes/:id' element={<QuizInfo currentUser={currentUser}/>}></Route>
+        <Route path='/create-quiz' element={<CreateQuiz quizzes={quizzes} setQuizzes={setQuizzes} currentUser={currentUser}/>}></Route>
+        <Route path='/quizzes/:id' element={<QuizInfo quizzes={quizzes} setQuizzes={setQuizzes} currentUser={currentUser}/>}></Route>
         <Route path='/quizzes/:id/attempt/:id' element={<AttemptResults currentUser={currentUser}/>}></Route>
-        <Route path='/' element={<Home currentUser={currentUser}/>}></Route>
+        <Route path='/' element={<Home quizzes={quizzes} setQuizzes={setQuizzes} currentUser={currentUser}/>}></Route>
         
       </Routes>
     </div>

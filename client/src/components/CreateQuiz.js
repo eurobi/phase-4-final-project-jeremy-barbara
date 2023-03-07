@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {useNavigate} from "react-router-dom"
 
 
-function CreateQuiz({currentUser}){
+function CreateQuiz({currentUser, quizzes, setQuizzes}){
 
     const [errors, setErrors] = useState()
 
@@ -43,7 +43,9 @@ function CreateQuiz({currentUser}){
         }).then(r => {
             if(r.ok){
                 r.json()
-                .then(quiz => history(`/quizzes/${quiz.id}`))
+                .then(quiz => {
+                    setQuizzes([...quizzes, quiz])
+                    history(`/quizzes/${quiz.id}`)})
             }else{
                 r.json().then(e => setErrors(Object.entries(e.errors).flat()))
             }

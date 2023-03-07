@@ -5,7 +5,7 @@ import Quiz from "./Quiz";
 import EditUserForm from "./EditUserForm";
 import UserScores from "./UserScores";
 
-function Me({ currentUser, setCurrentUser }){
+function Me({ currentUser, setCurrentUser, quizzes, setQuizzes }){
     const history = useNavigate()
     const [editing, setEditing] = useState(false)
 
@@ -26,21 +26,15 @@ function Me({ currentUser, setCurrentUser }){
         setEditing(!editing)
     }
 
-    const [quizzes, setQuizzes] = useState([])
-
-    useEffect(() => {
-        fetch(`/users/${currentUser.id}/quizzes`)
-        .then(r => r.json())
-        .then(quizzes => setQuizzes(quizzes))
-    },[])
     
     let quizElements
 
     if (quizzes !== []){
         quizElements = quizzes.map((quiz) => {
+            if(quiz.user_id === currentUser.id){
             return (
                 <Quiz key={quiz.id} currentUser={currentUser} quiz={quiz}/>
-            )
+            )}
         })
     }
     

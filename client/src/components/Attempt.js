@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom"
 
 
 
-function Attempt({quiz, currentUser}){
+function Attempt({quiz, currentUser, quizzes, setQuizzes}){
     const history = useNavigate()
     const [done, setDone] = useState(false)
     const [attemptData, setAttemptData] = useState()
@@ -43,6 +43,14 @@ function Attempt({quiz, currentUser}){
             if(response.ok){
                 response.json()
                 .then(attempt => {
+                    setQuizzes([...quizzes].map(quiz =>{
+                        if(quiz.id === attempt.quiz.id){
+                            return {...quiz, avg_score: attempt.quiz.avg_score}
+                        }
+                        else{
+                            return quiz
+                        }
+                    }))
                     setAttemptData(attempt)
                     setDone(true)
                 })

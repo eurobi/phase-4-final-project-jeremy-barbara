@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Quiz from "./Quiz";
 
-function Home({currentUser}){
-    const [quizzes, setQuizzes] = useState([])
-
-    useEffect(() => {
-        fetch('/quizzes')
-        .then(r => r.json())
-        .then(quizzes => setQuizzes(quizzes))
-    },[])
+function Home({currentUser, quizzes, setQuizzes}){
+    
 
     const quizElements = quizzes.map((quiz) => {
         return (

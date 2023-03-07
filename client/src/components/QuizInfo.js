@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom"
 import Attempt from "./Attempt";
 
 
-function QuizInfo({currentUser}){
+function QuizInfo({currentUser, quizzes, setQuizzes}){
     const history = useNavigate()
     const [quiz, setQuiz] = useState({
         questions: [],
@@ -22,7 +22,11 @@ function QuizInfo({currentUser}){
     function handleDeleteClick(){
         fetch(`/quizzes/${id}`,{
             method: "DELETE"
-        }).then(history('/'))
+        })
+        .then(deletedQuiz => {
+            setQuizzes([...quizzes].filter(q => q.id !== quiz.id))
+            history('/')
+        })
     }
     
 
@@ -55,7 +59,7 @@ function QuizInfo({currentUser}){
 
     if(attempting){
         return(
-            <Attempt quiz={quiz} currentUser={currentUser}></Attempt>
+            <Attempt quizzes={quizzes} setQuizzes={setQuizzes} quiz={quiz} currentUser={currentUser}></Attempt>
         )
     }
     else{

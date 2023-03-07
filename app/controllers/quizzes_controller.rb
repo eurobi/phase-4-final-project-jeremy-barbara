@@ -14,7 +14,7 @@ class QuizzesController < ApplicationController
     def create
         quiz = Quiz.create(quiz_params)
         if quiz.valid?
-            render json: quiz, status: :created
+            render json: quiz, include: :user, status: :created
         else
             render json: {errors: quiz.errors.full_messages}, status: :unprocessable_entity
         end
