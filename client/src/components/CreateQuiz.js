@@ -26,7 +26,7 @@ function CreateQuiz({currentUser, quizzes, setQuizzes}){
         e.preventDefault()
         const quizData = {
             title: formData.title,
-            user_id: currentUser.id,
+            author_id: currentUser.id,
             questions: [
                 formData.q1, formData.q2, formData.q3, formData.q4, formData.q5
             ],

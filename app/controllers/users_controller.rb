@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
     def show
         user = User.find_by(id: session[:user_id])
-        render json: user
+        render json: user, methods: :createdquizzes, include: :attempts
     end
 
     def create
@@ -28,6 +28,7 @@ class UsersController < ApplicationController
             end
         end
     end
+    
 
     private
     def user_params

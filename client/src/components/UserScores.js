@@ -17,6 +17,7 @@ function UserScores({currentUser}){
 
     let attemptElements
 
+
     if(attemptData){
         attemptElements = attemptData.map(attempt => {
             return(
@@ -27,7 +28,7 @@ function UserScores({currentUser}){
 
     return(
         <div>
-            {attemptElements}
+            {attemptElements? attemptElements : null}
         </div>
     )
 }

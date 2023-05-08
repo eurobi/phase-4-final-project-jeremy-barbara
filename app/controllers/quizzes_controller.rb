@@ -4,7 +4,11 @@ class QuizzesController < ApplicationController
 
     def index
         quizzes = Quiz.all
-        render json: quizzes, include: :user
+        newquizzes = quizzes.map do |quiz| 
+            quiz.author = quiz.author_id 
+            quiz
+        end
+        render json: newquizzes, methods: :author
     end
 
     def show
@@ -25,7 +29,7 @@ class QuizzesController < ApplicationController
     end
 
     def userquizzes
-        quizzes = Quiz.where(:user_id => params[:id])
+        quizzes = Quiz.where(:author_id => params[:id])
         render json: quizzes, include: :user
     end
 

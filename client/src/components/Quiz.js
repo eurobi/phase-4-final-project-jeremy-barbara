@@ -24,7 +24,7 @@ function Quiz({quiz, currentUser}){
             <div className="preview-thumb-container">
                 {quizImages}
             </div>
-            <h4>Author: {quiz.user.username}</h4>
+            <h4>Author: {quiz.author}</h4>
             <h4>Average Score: {quiz.avg_score}/5</h4>
             {currentUser? <button onClick={handleClick}>View Quiz</button> : null}
         </div>

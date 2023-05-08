@@ -31,7 +31,7 @@ function Me({ currentUser, setCurrentUser, quizzes, setQuizzes }){
 
     if (quizzes !== []){
         quizElements = quizzes.map((quiz) => {
-            if(quiz.user_id === currentUser.id){
+            if(quiz.author_id === currentUser.id){
             return (
                 <Quiz key={quiz.id} currentUser={currentUser} quiz={quiz}/>
             )}
