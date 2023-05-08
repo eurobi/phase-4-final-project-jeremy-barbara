@@ -18,7 +18,7 @@ class QuizzesController < ApplicationController
     def create
         quiz = Quiz.create(quiz_params)
         if quiz.valid?
-            render json: quiz, include: :user, status: :created
+            render json: quiz, status: :created
         else
             render json: {errors: quiz.errors.full_messages}, status: :unprocessable_entity
         end
@@ -36,7 +36,7 @@ class QuizzesController < ApplicationController
     private
 
     def quiz_params
-        params.permit(:user_id, :title, :questions => [], :answers => [])
+        params.permit(:title, :author_id, :questions => [], :answers => [])
     end
 
     def find_quiz
