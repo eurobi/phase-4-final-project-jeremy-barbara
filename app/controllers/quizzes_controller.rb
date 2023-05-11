@@ -1,5 +1,5 @@
 class QuizzesController < ApplicationController
-    # skip_before_action :authorized, only: :index
+    skip_before_action :authorized, only: :index
     before_action :find_quiz, only: [:show, :destroy]
 
     def index
