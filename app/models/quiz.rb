@@ -26,11 +26,4 @@ class Quiz < ApplicationRecord
         end
     end
 
-    def author
-        @author
-    end
-    def author=(author_id)
-        user = User.find(author_id)
-        @author = user.username
-    end
 end

@@ -24,7 +24,9 @@ function QuizInfo({currentUser, quizzes, setQuizzes}){
             method: "DELETE"
         })
         .then(deletedQuiz => {
+            console.log(deletedQuiz)
             setQuizzes([...quizzes].filter(q => q.id !== quiz.id))
+            currentUser.createdquizzes = currentUser.createdquizzes.filter(q => q.id !== quiz.id)
             history('/')
         })
     }
@@ -52,7 +54,15 @@ function QuizInfo({currentUser, quizzes, setQuizzes}){
     if(quiz.attempts){
         attempters = quiz.attempts.map((attempt) => attempt.user_id)
     }
-    
+
+    let attemptElements = []
+
+    if(quiz.attempts){
+        attemptElements = quiz.attempts.map((attempt) => {
+            return(<li>
+                {`${attempt.attempter} : ${attempt.score}/5`}
+            </li>)
+    })}
     
 
     const { id } = useParams()
@@ -64,13 +74,21 @@ function QuizInfo({currentUser, quizzes, setQuizzes}){
     }
     else{
     return(
-        <>
-            <h1>{quiz.title}</h1>
-            {quiz? imgs : null}
-            {quiz.author_id !== currentUser.id && !attempters.includes(currentUser.id) ? <button onClick={handleClick} id='take-quiz-btn'>Take quiz</button> : null}
-            {quiz.author_id == currentUser.id? <button onClick={handleDeleteClick} id='delete-quiz-btn'>Delete quiz</button> : null}
-            {attempters.includes(currentUser.id)? <h4>You've already taken this quiz</h4> : null}
-        </>
+        <div>
+            <div>
+                <h1>{quiz.title}</h1>
+                {quiz? imgs : null}
+                {quiz.author_id !== currentUser.id && !attempters.includes(currentUser.id) ? <button onClick={handleClick} id='take-quiz-btn'>Take quiz</button> : null}
+                {quiz.author_id == currentUser.id? <button onClick={handleDeleteClick} id='delete-quiz-btn'>Delete quiz</button> : null}
+                {attempters.includes(currentUser.id)? <h4>You've already taken this quiz</h4> : null}
+            </div>
+            <div>
+                <h1>Scores</h1>
+                <ul>
+                    {attemptElements}
+                </ul>
+            </div>
+        </div>
     )}
 }
 

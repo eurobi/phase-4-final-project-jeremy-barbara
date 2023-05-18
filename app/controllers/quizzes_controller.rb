@@ -4,15 +4,11 @@ class QuizzesController < ApplicationController
 
     def index
         quizzes = Quiz.all
-        newquizzes = quizzes.map do |quiz| 
-            quiz.author = quiz.author_id 
-            quiz
-        end
-        render json: newquizzes, methods: :author
+        render json: quizzes, methods: :author
     end
 
     def show
-        render json: @quiz, include: :attempts
+        render json: @quiz, methods: :author
     end
 
     def create

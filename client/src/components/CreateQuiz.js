@@ -45,6 +45,7 @@ function CreateQuiz({currentUser, quizzes, setQuizzes}){
                 r.json()
                 .then(quiz => {
                     setQuizzes([...quizzes, quiz])
+                    currentUser.createdquizzes = [...currentUser.createdquizzes, quiz]
                     history(`/quizzes/${quiz.id}`)})
             }else{
                 r.json().then(e => setErrors(Object.entries(e.errors).flat()))

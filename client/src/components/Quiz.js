@@ -16,7 +16,6 @@ function Quiz({quiz, currentUser}){
         return <img key={question} className="quiz-preview-thumb" src={question}></img>
     })
 
-
     return(
         <div className="quiz-item">  
             

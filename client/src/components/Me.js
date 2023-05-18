@@ -26,15 +26,23 @@ function Me({ currentUser, setCurrentUser, quizzes, setQuizzes }){
         setEditing(!editing)
     }
 
+    function handleDeleteClick(e){
+        e.preventDefault()
+        fetch(`/users/${currentUser.id}`,{
+            method: "DELETE"
+        })
+        .then(setCurrentUser(null))
+        .then(history('/login'))
+    }
+
     
     let quizElements
 
-    if (quizzes !== []){
-        quizElements = quizzes.map((quiz) => {
-            if(quiz.author_id === currentUser.id){
+    if (currentUser.createdquizzes && currentUser.createdquizzes !== []){
+        quizElements = currentUser.createdquizzes.map((quiz) => {
             return (
                 <Quiz key={quiz.id} currentUser={currentUser} quiz={quiz}/>
-            )}
+            )
         })
     }
     
@@ -48,6 +56,7 @@ function Me({ currentUser, setCurrentUser, quizzes, setQuizzes }){
             </div>
             <button onClick={handleLogout}>Logout</button>
             <button onClick={handleEditClick}>Edit User Details</button>
+            <button onClick={handleDeleteClick}>Delete Account</button>
             {editing? <EditUserForm setEditing={setEditing} currentUser={currentUser} setCurrentUser={setCurrentUser}></EditUserForm>: null}
             <div id='user-quiz-info-container'>
                 <div>
