@@ -3,9 +3,6 @@ import UserScore from "./UserScore";
 
 function UserScores({currentUser}){
 
-    function handleViewAttempt(){
-        
-    }
 
     const [attemptData, setAttemptData] = useState()
 
@@ -21,7 +18,7 @@ function UserScores({currentUser}){
     if(attemptData){
         attemptElements = attemptData.map(attempt => {
             return(
-            <UserScore currentUser={currentUser} attempt={attempt}/>)
+            <UserScore key={attempt.id} currentUser={currentUser} attempt={attempt}/>)
         })
     }
     

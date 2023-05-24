@@ -10,7 +10,7 @@ function UserScore({currentUser, attempt}){
         setViewing(!viewing)
     }
 
-console.log(attempt)
+
     return(
         <>
             <div className="attempt-thumb">

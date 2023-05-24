@@ -15,7 +15,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState('')
 
   const [quizzes, setQuizzes] = useState([])
-
+  
     useEffect(() => {
         fetch('/quizzes')
         .then(r => r.json())

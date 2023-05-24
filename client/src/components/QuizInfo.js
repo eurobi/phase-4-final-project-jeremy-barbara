@@ -58,10 +58,10 @@ function QuizInfo({currentUser, quizzes, setQuizzes}){
     let attemptElements = []
 
     if(quiz.attempts){
-        attemptElements = quiz.attempts.map((attempt) => {
-            return(<li>
-                {`${attempt.attempter} : ${attempt.score}/5`}
-            </li>)
+        attemptElements = quiz.users.map((user) => {
+            return(<p>
+                {`${user.username}`}
+            </p>)
     })}
     
 
@@ -83,10 +83,10 @@ function QuizInfo({currentUser, quizzes, setQuizzes}){
                 {attempters.includes(currentUser.id)? <h4>You've already taken this quiz</h4> : null}
             </div>
             <div>
-                <h1>Scores</h1>
-                <ul>
-                    {attemptElements}
-                </ul>
+                <h1>Users who have taken this quiz:</h1>
+                <p>
+                    {attemptElements.length > 0? attemptElements : <p>No users have attempted this quiz yet</p>}
+                </p>
             </div>
         </div>
     )}
