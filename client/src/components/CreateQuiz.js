@@ -8,16 +8,16 @@ function CreateQuiz({currentUser, quizzes, setQuizzes}){
 
     const [formData, setFormData] = useState({
         title: "",
-        q1: "",
-        q2: "",
-        q3: "",
-        q4: "",
-        q5: "",
-        a1: "",
-        a2: "",
-        a3: "",
-        a4: "",
-        a5: "",
+        q1: null,
+        q2: null,
+        q3: null,
+        q4: null,
+        q5: null,
+        a1: null,
+        a2: null,
+        a3: null,
+        a4: null,
+        a5: null,
     })
 
     const history = useNavigate()

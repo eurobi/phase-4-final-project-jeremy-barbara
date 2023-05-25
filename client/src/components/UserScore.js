@@ -14,9 +14,9 @@ function UserScore({currentUser, attempt}){
     return(
         <>
             <div className="attempt-thumb">
-                <h4>{attempt.quiz.title}</h4>
+                <h4>{attempt.quiz? attempt.quiz.title : "Deleted Quiz"}</h4>
                 <h4>{attempt.score}/5</h4>
-                <button onClick={handleViewAttempt}>View attempt</button>
+                {attempt.quiz? <button onClick={handleViewAttempt}>View attempt</button> : null}
             </div>
             <div>
             {viewing? <AttemptResults currentUser={currentUser} attemptData={attempt}/> : null}
